@@ -38,3 +38,15 @@ def obter_usuario_atual(
         raise credenciais_invalidas
 
     return usuario
+
+def obter_admin_atual(usuario_atual: Usuario = Depends(obter_usuario_atual)) -> Usuario:
+    """
+    Reaproveita obter_usuario_atual (já validou o token) e adiciona
+    uma checagem extra: só deixa passar se o usuário for admin.
+    """
+    if usuario_atual.tipo != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Apenas administradores podem acessar este recurso.",
+        )
+    return usuario_atual
