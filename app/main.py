@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.database import Base, engine
 from app import models
-from app.routers import autor, categoria, emprestimo, usuario, livro, exemplar, reserva, auth
+from app.routers import autor, categoria, emprestimo, usuario, livro, exemplar, reserva, auth, relatorio
 
 Base.metadata.create_all(bind=engine)
 
@@ -15,6 +15,7 @@ app.include_router(livro.router)
 app.include_router(exemplar.router)
 app.include_router(emprestimo.router)
 app.include_router(reserva.router)
+app.include_router(relatorio.router)
 
 
 @app.get("/")
