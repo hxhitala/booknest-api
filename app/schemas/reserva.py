@@ -7,8 +7,9 @@ class ReservaBase(BaseModel):
     livro_id: int
 
 
-class ReservaCreate(ReservaBase):
-    pass
+class ReservaCreate(BaseModel):
+    livro_id: int
+    # usuario_id não é mais enviado pelo cliente — vem do token
 
 
 class ReservaResponse(ReservaBase):

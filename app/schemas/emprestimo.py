@@ -8,11 +8,9 @@ class EmprestimoBase(BaseModel):
     exemplar_id: int
 
 
-class EmprestimoCreate(EmprestimoBase):
-    pass
-    # o cliente NÃO envia data_emprestimo nem data_prevista.
-    # Isso vai ser calculado no service (hoje + prazo de 14 dias),
-    # nunca confiamos em datas vindas do cliente pra regra de negócio.
+class EmprestimoCreate(BaseModel):
+    exemplar_id: int
+    # usuario_id não é mais enviado pelo cliente — vem do token
 
 
 class EmprestimoResponse(EmprestimoBase):
@@ -28,5 +26,3 @@ class EmprestimoResponse(EmprestimoBase):
 
 class DevolucaoRequest(BaseModel):
     exemplar_id: int
-    # schema minúsculo e específico só pro endpoint de devolução —
-    # não reaproveita EmprestimoCreate porque a intenção é outra

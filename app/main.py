@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from app.database import Base, engine
 from app import models
-from app.routers import autor, categoria, emprestimo, usuario, livro, exemplar, reserva
+from app.routers import autor, categoria, emprestimo, usuario, livro, exemplar, reserva, auth
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="BookNest API")
 
+app.include_router(auth.router)
 app.include_router(usuario.router)
 app.include_router(autor.router)
 app.include_router(categoria.router)
